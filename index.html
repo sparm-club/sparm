@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نادي Sparm المدرسي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>Club SPARM - École Supérieure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- إعدادات عامة --- */
+        /* --- Styles généraux --- */
         :root {
             --primary-color: #2c3e50;
             --accent-color: #27ae60;
@@ -18,7 +18,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
@@ -27,10 +27,10 @@
             line-height: 1.6;
         }
 
-        /* --- الإطار العلوي (شريط التنقل) --- */
+        /* --- Barre de navigation --- */
         header {
             background-color: var(--primary-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -47,32 +47,34 @@
 
         .logo {
             font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 700;
             color: white;
+            letter-spacing: 1px;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 20px;
+            gap: 30px;
         }
 
         .nav-links a {
             text-decoration: none;
             color: white;
-            font-weight: bold;
+            font-weight: 500;
             transition: 0.3s;
+            font-size: 1.1rem;
         }
 
         .nav-links a:hover {
             color: #f1c40f;
         }
 
-        /* --- قسم صورة المدرسة (الجديد) --- */
+        /* --- Image de l'école --- */
         .school-image {
             width: 100%;
-            height: 400px;
-            background-image: url('photo3.jpeg'); /* ضع هنا اسم صورة المدرسة */
+            height: 500px;
+            background-image: url('photo3.jpeg'); /* Remplacez par le nom de votre image */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -89,29 +91,33 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.4); /* طبقة داكنة شفافة لتحسين قراءة النص */
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.8) 0%, rgba(39, 174, 96, 0.6) 100%);
         }
 
         .school-title {
             position: relative;
             color: white;
-            font-size: 3rem;
-            font-weight: bold;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             z-index: 1;
+            padding: 20px;
         }
 
-        .school-title span {
-            display: block;
+        .school-title h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .school-title p {
             font-size: 1.5rem;
-            margin-top: 10px;
-            font-weight: normal;
+            font-weight: 400;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* --- القسم الرئيسي --- */
+        /* --- Section héros --- */
         .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://source.unsplash.com/1600x900/?school,students');
+            background: linear-gradient(rgba(44, 62, 80, 0.95), rgba(44, 62, 80, 0.95)), url('https://source.unsplash.com/1600x900/?science,students');
             background-size: cover;
             background-position: center;
             min-height: 60vh;
@@ -120,236 +126,333 @@
             align-items: center;
             text-align: center;
             color: white;
-            padding: 40px 20px;
+            padding: 60px 20px;
         }
 
-        .hero h1 {
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h2 {
             font-size: 3rem;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            color: #f1c40f;
         }
 
         .hero p {
             font-size: 1.2rem;
-            margin-bottom: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 30px;
+            opacity: 0.95;
         }
 
         .btn {
             background-color: var(--accent-color);
             color: white;
-            padding: 10px 25px;
+            padding: 12px 35px;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+            border-radius: 50px;
+            font-weight: 600;
             transition: 0.3s;
             display: inline-block;
+            font-size: 1.1rem;
         }
 
         .btn:hover {
             background-color: #219150;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
         }
 
-        /* --- قسم الأخبار --- */
+        /* --- Section actualités --- */
         .news-section {
-            padding: 50px 5%;
+            padding: 60px 5%;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
             color: var(--primary-color);
-            font-size: 2rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
         }
 
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
         }
 
         .news-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .news-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
 
         .news-img {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
-            display: block;
+            transition: 0.3s;
+        }
+
+        .news-card:hover .news-img {
+            transform: scale(1.05);
         }
 
         .news-content {
-            padding: 20px;
+            padding: 25px;
         }
 
         .news-date {
-            color: #888;
+            color: var(--accent-color);
             font-size: 0.9rem;
+            font-weight: 600;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
-        /* --- قسم من نحن --- */
+        .news-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* --- Section À propos --- */
         .about-section {
-            padding: 50px 5%;
-            max-width: 800px;
+            padding: 60px 5%;
+            background-color: white;
+        }
+
+        .about-container {
+            max-width: 1000px;
             margin: 0 auto;
+        }
+
+        .about-content {
             text-align: center;
         }
 
-        .about-section p {
-            text-align: justify;
-            margin-top: 20px;
+        .about-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
 
-        /* --- الفوتر --- */
+        .acronym {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .acronym-item {
+            background-color: var(--primary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+        }
+
+        /* --- Footer --- */
         footer {
             background-color: var(--primary-color);
             color: white;
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
+            padding: 40px 20px;
         }
 
-        footer p {
-            margin: 5px 0;
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        /* --- التجاوب مع الجوال --- */
+        .footer-content p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .email {
+            color: #f1c40f;
+            font-weight: 600;
+        }
+
+        /* --- Responsive --- */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
             
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
             .school-image {
-                height: 300px;
+                height: 350px;
             }
             
-            .school-title {
+            .school-title h1 {
                 font-size: 2rem;
             }
             
-            .school-title span {
+            .school-title p {
                 font-size: 1.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .acronym {
+                gap: 15px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- شريط التنقل العلوي -->
+    <!-- Barre de navigation -->
     <header>
         <nav>
-            <div class="logo">SPARM CLUB</div>
+            <div class="logo">SPARM</div>
             <ul class="nav-links">
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#news">الأخبار</a></li>
-                <li><a href="#about">من نحن</a></li>
-                <li><a href="#contact">اتصل بنا</a></li>
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#news">Actualités</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- صورة المدرسة (جديد) -->
+    <!-- Image de l'école -->
     <div class="school-image">
         <div class="school-title">
-            المدرسة العليا للتربية والتكوين
-            <span>École Supérieure de l'Éducation et de la Formation</span>
+            <h1>École Supérieure de l'Éducation et de la Formation</h1>
+            <p>Excellence • Innovation • Pédagogie</p>
         </div>
     </div>
 
-    <!-- القسم الرئيسي -->
+    <!-- Section Accueil -->
     <section id="home" class="hero">
-        <div>
-            <h1>Bienvenue au Club SPARM</h1>
-            <p>Le club SPARM est un club scientifique de l'École Supérieure de l'Éducation et de la Formation. Nous encourageons l'innovation, la recherche et le travail d'équipe.</p>
-            <a href="#news" class="btn">آخر الأخبار</a>
+        <div class="hero-content">
+            <h2>Bienvenue au Club SPARM</h2>
+            <p>Le club scientifique de l'École Supérieure de l'Éducation et de la Formation. Nous encourageons l'innovation, la recherche scientifique et le travail d'équipe dans un environnement dynamique et stimulant.</p>
+            <a href="#news" class="btn">Découvrir nos activités</a>
         </div>
     </section>
 
-    <!-- قسم الأخبار -->
+    <!-- Section Actualités -->
     <section id="news" class="news-section">
-        <h2 class="section-title">آخر الأخبار</h2>
+        <h2 class="section-title">Actualités du Club</h2>
         <div class="news-grid">
-            <!-- خبر 1 -->
+            <!-- Actualité 1 -->
             <div class="news-card">
-                <img src="photo1.jpeg" alt="صورة الخبر الأول" class="news-img">
+                <img src="photo1.jpeg" alt="Création du club" class="news-img">
                 <div class="news-content">
-                    <span class="news-date">20 أكتوبر 2023</span>
-                    <h3>إنشاء النادي</h3>
-                    <p>تم افتتاح نادي SPARM العلمي بحضور عدد كبير من الطلاب المهتمين بالعلوم والفيزياء والرياضيات.</p>
+                    <span class="news-date">20 Octobre 2023</span>
+                    <h3>Création du Club SPARM</h3>
+                    <p>Inauguration officielle du club scientifique en présence de nombreux étudiants passionnés par les sciences.</p>
                 </div>
             </div>
-            <!-- خبر 2 -->
+            <!-- Actualité 2 -->
             <div class="news-card">
-                <div class="news-img" style="background-color: #ddd; display: flex; align-items: center; justify-content: center;">صورة الخبر</div>
+                <div class="news-img" style="background: linear-gradient(135deg, #3498db, #2c3e50); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">🔬</div>
                 <div class="news-content">
-                    <span class="news-date">15 أكتوبر 2023</span>
-                    <h3>مهرجان العلوم</h3>
-                    <p>يشارك النادي في مهرجان العلوم بتنظيم ورش عمل تفاعلية للطلاب.</p>
+                    <span class="news-date">15 Octobre 2023</span>
+                    <h3>Festival des Sciences</h3>
+                    <p>Participation au festival des sciences avec des ateliers interactifs et des expériences passionnantes.</p>
                 </div>
             </div>
-            <!-- خبر 3 -->
+            <!-- Actualité 3 -->
             <div class="news-card">
-                <img src="photo1.jpeg" alt="صورة Lego" class="news-img">
+                <img src="photo1.jpeg" alt="Atelier Lego" class="news-img">
                 <div class="news-content">
-                    <span class="news-date">10 أكتوبر 2023</span>
-                    <h3>بناء النماذج</h3>
-                    <p>نظمنا ورشة عمل لبناء نماذج إبداعية باستخدام قطع Lego بمشاركة الطلاب.</p>
+                    <span class="news-date">10 Octobre 2023</span>
+                    <h3>Atelier Lego Education</h3>
+                    <p>Atelier de construction de modèles scientifiques avec Lego pour développer la créativité des étudiants.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- قسم من نحن -->
+    <!-- Section À propos -->
     <section id="about" class="about-section">
-        <h2 class="section-title">من نحن</h2>
-        <p>
-            Le club SPARM est un club scientifique de l'École Supérieure de l'Éducation et de la Formation. Son nom représente ses principaux domaines d'intérêt :
-        </p>
-        <p style="font-weight: bold; margin: 15px 0;">
-            S pour Sciences - P pour Physique - A pour Analyse - R pour Réactions - M pour Mathématiques
-        </p>
-        <p>
-            Notre club a pour objectif de renforcer l'esprit scientifique chez les étudiants, de développer la coopération entre eux et d'encourager l'excellence académique. Nous organisons des activités pédagogiques, des ateliers scientifiques et des rencontres éducatives dans un cadre dynamique et motivant.
-        </p>
-        <p style="margin-top: 15px;">
-            SPARM joue également un rôle important dans l'orientation et la sensibilisation des étudiants, en les accompagnant dans leur parcours universitaire et professionnel. Nous croyons que l'université n'est pas seulement un lieu d'étude, mais un espace de développement personnel et scientifique. SPARM, c'est un espace d'apprentissage, d'innovation et de partage au service de la science et de l'éducation.
-        </p>
+        <div class="about-container">
+            <h2 class="section-title">À propos de SPARM</h2>
+            <div class="about-content">
+                <p>Le club <strong>SPARM</strong> est un club scientifique de l'École Supérieure de l'Éducation et de la Formation. Notre nom représente nos principaux domaines d'intérêt :</p>
+                
+                <div class="acronym">
+                    <div class="acronym-item">S</div>
+                    <div class="acronym-item">P</div>
+                    <div class="acronym-item">A</div>
+                    <div class="acronym-item">R</div>
+                    <div class="acronym-item">M</div>
+                </div>
+                
+                <p style="font-weight: 600; margin-bottom: 30px;">
+                    Sciences • Physique • Analyse • Réactions • Mathématiques
+                </p>
+                
+                <p>Notre objectif est de renforcer l'esprit scientifique chez les étudiants, développer la coopération et encourager l'excellence académique. Nous organisons des activités pédagogiques, des ateliers scientifiques et des rencontres éducatives dans un cadre dynamique et motivant.</p>
+                
+                <p>SPARM joue un rôle important dans l'orientation et la sensibilisation des étudiants, en les accompagnant dans leur parcours universitaire et professionnel. Nous croyons que l'université n'est pas seulement un lieu d'étude, mais un espace de développement personnel et scientifique.</p>
+                
+                <p style="font-style: italic; margin-top: 30px; color: var(--accent-color);">"SPARM, un espace d'apprentissage, d'innovation et de partage au service de la science et de l'éducation."</p>
+            </div>
+        </div>
     </section>
 
-    <!-- الفوتر -->
+    <!-- Footer -->
     <footer id="contact">
-        <p>جميع الحقوق محفوظة © 2023 - نادي SPARM العلمي</p>
-        <p>البريد الإلكتروني: clubsparm15@gmail.com</p>
-        <p>École Supérieure de l'Éducation et de la Formation</p>
+        <div class="footer-content">
+            <p>© 2023 Club SPARM - Tous droits réservés</p>
+            <p>École Supérieure de l'Éducation et de la Formation</p>
+            <p class="email">📧 clubsparm15@gmail.com</p>
+            <p>📍 École Supérieure de l'Éducation et de la Formation , Oujda , Maroc</p>
+        </div>
     </footer>
 
     <script>
-        // كود التمرير السلس
+        // Smooth scrolling pour les liens
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
-                        behavior: 'smooth'
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
