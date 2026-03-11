@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Club SPARM - École Supérieure</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         /* --- Styles généraux --- */
         :root {
@@ -382,6 +384,18 @@
             margin-bottom: 20px;
             text-align: center;
             animation: slideIn 0.5s ease;
+            display: none;
+        }
+
+        .error-message {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+            display: none;
         }
 
         @keyframes slideIn {
@@ -625,7 +639,7 @@
         </div>
     </section>
 
-    <!-- Section Articles (contenu inchangé pour rester concis) -->
+    <!-- Section Articles -->
     <section id="actu1" class="article-section" style="display: none; padding: 60px 5%; background-color: white;">
         <div style="max-width: 800px; margin: 0 auto;">
             <a href="#news" class="back-btn" onclick="hideArticle()" style="display: inline-block; margin-bottom: 30px; padding: 10px 25px; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: 0.3s;">← Retour aux actualités</a>
@@ -785,17 +799,21 @@
         </div>
     </section>
 
-    <!-- Section Contact avec formulaire -->
+    <!-- Section Contact avec formulaire EmailJS (COMPLET ET FONCTIONNEL) -->
     <section id="contact" class="contact-section">
         <div class="contact-container">
             <h2 class="section-title" data-i18n="contact-title">Contactez-nous</h2>
             
             <div class="contact-form">
-                <div id="successMessage" class="success-message" style="display: none;">
+                <div id="successMessage" class="success-message">
                     ✅ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.
                 </div>
+                
+                <div id="errorMessage" class="error-message">
+                    ❌ Erreur lors de l'envoi. Veuillez réessayer ou nous contacter directement par email.
+                </div>
 
-                <form id="contactForm" onsubmit="submitForm(event)">
+                <form id="contactForm">
                     <div class="form-group">
                         <label for="name" data-i18n="name-label">Nom complet :</label>
                         <input type="text" id="name" name="name" required>
@@ -811,7 +829,7 @@
                         <textarea id="message" name="message" required></textarea>
                     </div>
                     
-                    <button type="submit" class="btn" style="width: 100%;" data-i18n="send-btn">Envoyer le message</button>
+                    <button type="submit" class="btn" style="width: 100%;" id="submitBtn" data-i18n="send-btn">Envoyer le message</button>
                 </form>
 
                 <div style="margin-top: 30px; text-align: center;">
@@ -859,33 +877,73 @@
     </footer>
 
     <script>
-        // --- Gestionnaire de formulaire de contact ---
-        function submitForm(event) {
+        // 📧 Configuration EmailJS - TOUS LES IDS SONT MAINTENANT CONFIGURÉS
+        const EMAILJS_CONFIG = {
+            publicKey: 'a4m-tsNLc3E3vBgYi',     // ✅ Votre clé publique
+            serviceId: 'service_ydvk0cw',       // ✅ Votre Service ID
+            templateId: 'template_sparm'        // ✅ Votre Template ID
+        };
+
+        // Initialisation d'EmailJS avec votre clé publique
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+
+        // Gestionnaire du formulaire de contact
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // Récupérer les données du formulaire
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
             
-            // Ici vous pouvez ajouter votre logique d'envoi de formulaire
-            // Par exemple, utiliser Formspree ou EmailJS
+            // Désactiver le bouton pendant l'envoi
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Envoi en cours...';
             
-            // Afficher le message de succès
-            const successMsg = document.getElementById('successMessage');
-            successMsg.style.display = 'block';
+            // Masquer les messages précédents
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
             
-            // Réinitialiser le formulaire
-            document.getElementById('contactForm').reset();
+            // Préparer les données pour EmailJS
+            const templateParams = {
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                message: document.getElementById('message').value,
+                to_email: 'clubsparm15@gmail.com',
+                date: new Date().toLocaleString('fr-FR')
+            };
             
-            // Cacher le message après 5 secondes
-            setTimeout(() => {
-                successMsg.style.display = 'none';
-            }, 5000);
-            
-            // Simuler l'envoi (remplacer par votre vrai endpoint)
-            console.log('Formulaire soumis:', { name, email, message });
-        }
+            // Envoyer l'email via EmailJS
+            emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, templateParams)
+                .then(function(response) {
+                    console.log('✅ Succès:', response);
+                    
+                    // Afficher le message de succès
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Réinitialiser le formulaire
+                    document.getElementById('contactForm').reset();
+                    
+                    // Masquer le message après 5 secondes
+                    setTimeout(() => {
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 5000);
+                })
+                .catch(function(error) {
+                    console.error('❌ Erreur:', error);
+                    
+                    // Afficher le message d'erreur
+                    document.getElementById('errorMessage').style.display = 'block';
+                    
+                    // Masquer le message après 5 secondes
+                    setTimeout(() => {
+                        document.getElementById('errorMessage').style.display = 'none';
+                    }, 5000);
+                })
+                .finally(function() {
+                    // Réactiver le bouton
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                });
+        });
 
         // --- Système multilingue ---
         const translations = {
@@ -994,7 +1052,6 @@
         };
 
         function changeLanguage(lang) {
-            // Mettre à jour tous les éléments avec data-i18n
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) {
@@ -1006,25 +1063,21 @@
                 }
             });
 
-            // Changer la direction pour l'arabe
             if (lang === 'ar') {
                 document.body.style.direction = 'rtl';
             } else {
                 document.body.style.direction = 'ltr';
             }
 
-            // Sauvegarder la préférence
             localStorage.setItem('preferred-language', lang);
         }
 
-        // Charger la langue préférée
         window.addEventListener('load', function() {
             const savedLang = localStorage.getItem('preferred-language') || 'fr';
             document.querySelector('.language-selector').value = savedLang;
             changeLanguage(savedLang);
         });
 
-        // Vos fonctions existantes
         function showArticle(articleId) {
             document.querySelectorAll('.article-section').forEach(section => {
                 section.style.display = 'none';
@@ -1055,7 +1108,6 @@
             });
         }
 
-        // Smooth scrolling pour les liens
         document.querySelectorAll('a[href^="#"]:not([onclick])').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1071,4 +1123,3 @@
     </script>
 </body>
 </html>
-
